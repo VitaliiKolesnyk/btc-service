@@ -1,6 +1,8 @@
 package com.api.client;
 
+import com.api.mapper.ApiResponseToExchangeRateMapper;
 import com.api.model.ApiResponse;
+import com.api.service.EmailService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;

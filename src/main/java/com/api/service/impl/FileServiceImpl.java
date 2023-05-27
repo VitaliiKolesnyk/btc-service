@@ -69,7 +69,7 @@ public class FileServiceImpl implements FileService {
 
             }
         } else {
-            log.warn("File does not exist");
+            log.warn("No subscribers were found");
 
             return List.of();
         }
