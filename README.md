@@ -11,7 +11,9 @@
 2. Perform following commands in terminal:
 
 docker network create btc-service-network
+
 docker run -d --name mail --network btc-service-network -p 8025:8025 -p 1025:1025 mailhog/mailhog:latest
+
 docker run -d --name app --network btc-service-network -p 8080:8080 vitkolesnyk/btc-service:latest
 
 
