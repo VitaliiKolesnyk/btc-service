@@ -15,7 +15,7 @@ docker run -d --name app --network btc-service-network -p 8080:8080 vitkolesnyk/
 
 
 ***API documentation is available after app running via link:
-http://localhost:8080/swagger-ui/index.html#/
+http://localhost:8080/swagger-ui/index.html#/***
 
 # Tests coverage:
 Class - 93&
