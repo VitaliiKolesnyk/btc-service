@@ -17,9 +17,6 @@ docker run -d --name mail --network btc-service-network -p 8025:8025 -p 1025:102
 docker run -d --name app --network btc-service-network -p 8080:8080 vitkolesnyk/btc-service:latest
 
 
-***API documentation is available after app running via link:
-http://localhost:8080/swagger-ui/index.html#/***
-
 ## Tests coverage:
 Class - 93%
 
@@ -37,5 +34,8 @@ Received emails can be checked via link: http://localhost:8025/
 External API for BTC-UAH rate receiving - https://rest.coinapi.io
 
 BTC-UAH rate is checking every 10 minutes, in case of rate change all subscribers receive email notification
+
+***API documentation is available after app running via link:
+http://localhost:8080/swagger-ui/index.html#/***
 
 
