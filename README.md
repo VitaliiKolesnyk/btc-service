@@ -3,7 +3,7 @@
 ## To implement API service:
 1. Find out the current rate of bitcoin (BTC) in UAH.
 2. Sign an email to receive information on changing the course.
-3. A request that will be sent to all subscribed users current course
+3. Implement request that will be sent to all subscribed users current course
 
 
 ## Steps for applications running
@@ -31,9 +31,9 @@ Mail server is mocked by Mailhog
 
 Received emails can be checked via link: http://localhost:8025/
 
-External API for BTC-UAH rate receiving - https://rest.coinapi.io
+External API for BTC rate receiving - https://rest.coinapi.io
 
-BTC-UAH rate is checking every 10 minutes, in case of rate change all subscribers receive email notification
+BTC rate is checking every 10 minutes, in case of rate change all subscribers receive email notification
 
 ***API documentation is available after app running via link:
 http://localhost:8080/swagger-ui/index.html#/***
