@@ -1,12 +1,12 @@
-## Task:
+# Task:
 
-# To implement API service:
+## To implement API service:
 1. Find out the current rate of bitcoin (BTC) in UAH.
 2. Sign an email to receive information on changing the course.
 3. A request that will be sent to all subscribed users current course
 
 
-# Steps for applications running
+## Steps for applications running
 1. Install Docker.
 2. Perform following commands in terminal:
 docker network create btc-service-network
@@ -17,7 +17,7 @@ docker run -d --name app --network btc-service-network -p 8080:8080 vitkolesnyk/
 ***API documentation is available after app running via link:
 http://localhost:8080/swagger-ui/index.html#/***
 
-# Tests coverage:
+## Tests coverage:
 Class - 93&
 Method - 83%
 Line - 80%
