@@ -6,6 +6,20 @@ To implement API service:
 3. A request that will be sent to all subscribed users current course
 
 
-*Steps for applications running*
+Steps for applications running
+1. Install Docker.
+2. Perform following commands in terminal:
+docker network create btc-service-network
+docker run -d --name mail --network btc-service-network -p 8025:8025 -p 1025:1025 mailhog/mailhog:latest
+docker run -d --name app --network btc-service-network -p 8080:8080 vitkolesnyk/btc-service:latest
+
+
+API documentation is available after app running via link:
+http://localhost:8080/swagger-ui/index.html#/
+
+Tests coverage:
+Class - 93&
+Method - 83%
+Line - 80%
 
 
