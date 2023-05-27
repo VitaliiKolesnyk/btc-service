@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  app:
+    image: vitkolesnyk/btc-api:13.0
+    ports:
+      - 8080:8080
+    networks:
+      - my-network
+    depends_on:
+      - mail
+
+  mail:
+    image: mailhog/mailhog:latest
+    ports:
+      - 1025:1025
+      - 8025:8025
+    networks:
+      - my-network
+
+networks:
+  my-network:
