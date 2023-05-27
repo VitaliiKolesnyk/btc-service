@@ -18,8 +18,10 @@ docker run -d --name app --network btc-service-network -p 8080:8080 vitkolesnyk/
 http://localhost:8080/swagger-ui/index.html#/***
 
 ## Tests coverage:
-Class - 93&
+Class - 93%
+
 Method - 83%
+
 Line - 80%
 
 ## Overview:
