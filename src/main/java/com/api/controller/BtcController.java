@@ -113,7 +113,7 @@ public class BtcController {
                     )
     })
     @PostMapping(value = "/sendEmails")
-    public ResponseEntity<String> sendEmails() {
+    public ResponseEntity<String> sendEmails() throws IOException {
         ApiResponse apiResponse = getBtcToUahRate();
         List<Subscriber> subscribers = fileService.getSubscribers();
 

@@ -10,5 +10,5 @@ public interface FileService {
 
     void addSubscriber(Subscriber subscriber) throws SubscriberAlreadySubscribedException, IOException;
 
-    List<Subscriber> getSubscribers();
+    List<Subscriber> getSubscribers() throws IOException;
 }

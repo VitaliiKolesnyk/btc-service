@@ -56,7 +56,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public List<Subscriber> getSubscribers() {
+    public List<Subscriber> getSubscribers() throws IOException {
         List<Subscriber> subscribers = new ArrayList<>();
 
         if (Files.exists(filePath)) {
@@ -67,7 +67,9 @@ public class FileServiceImpl implements FileService {
                 lines.forEach(s -> subscribers.add(new Subscriber(s)));
 
             } catch (IOException e) {
+                log.error("Unable to get subscribers from file");
 
+                throw e;
             }
         } else {
             log.warn("No subscribers were found");
