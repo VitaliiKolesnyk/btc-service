@@ -2,8 +2,8 @@
 
 ## To implement API service:
 1. Find out the current rate of bitcoin (BTC) in UAH.
-2. Sign an email to receive information on changing the course.
-3. Implement request that will be sent to all subscribed users current course
+2. Sign an email to receive information on changing the rate.
+3. Implement request that will be sent to all subscribed users current rate.
 
 
 ## Steps for applications running
