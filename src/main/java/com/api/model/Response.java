@@ -5,7 +5,8 @@ public enum Response {
     EMAILS_SENT("Emails were succesfully sent"),
     ALREADY_SUBSCRIBED("Email already present in subscription list"),
     NOT_VALID_EMAIL("Email is not valid"),
-    ERROR("Unpredictable exception");
+    ERROR("Unpredictable exception"),
+    NO_SUBSCRIBERS("Theare no subscribed emails");
 
     String response;
 

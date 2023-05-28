@@ -1,6 +1,7 @@
 package com.api.service.impl;
 
 import ch.qos.logback.classic.Logger;
+import com.api.exception.NoSubscribersException;
 import com.api.exception.SubscriberAlreadySubscribedException;
 import com.api.model.Subscriber;
 import com.api.service.FileService;
@@ -71,7 +72,7 @@ public class FileServiceImpl implements FileService {
         } else {
             log.warn("No subscribers were found");
 
-            return List.of();
+            throw new NoSubscribersException();
         }
 
         return subscribers;

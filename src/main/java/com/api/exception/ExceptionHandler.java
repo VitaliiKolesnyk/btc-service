@@ -22,6 +22,11 @@ public class ExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Response.NOT_VALID_EMAIL.getResponse());
     }
 
+    @org.springframework.web.bind.annotation.ExceptionHandler(NoSubscribersException.class)
+    public ResponseEntity<String> handleNoSubscribersException(NoSubscribersException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Response.NO_SUBSCRIBERS.getResponse());
+    }
+
     @org.springframework.web.bind.annotation.ExceptionHandler()
     public ResponseEntity<String> handleExceptions(Exception e) {
         log.error("Exception occured: {}", e.getStackTrace());
