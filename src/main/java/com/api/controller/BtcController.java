@@ -12,10 +12,12 @@ import com.api.util.EmailValidator;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.servers.Server;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
@@ -28,7 +30,8 @@ import java.util.List;
         info = @Info(
                 title = "GSES2 BTC application",
                 version = "1.0.0"
-        )
+        ),
+        servers = @Server(url = "localhost:8080", description = "HTTP")
 )
 @RestController
 @RequestMapping("/api")
@@ -52,11 +55,13 @@ public class BtcController {
         this.emailValidator = emailValidator;
     }
 
-    @Operation(summary = "Get current BTC to UAH rate")
+    @Operation(tags = "rate",
+            summary = "Get current BTC to UAH rate",
+            description = "Request should return current BTC to UAH rate using any third party service with public API",
+            operationId = "rate")
     @ApiResponses(value = {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "BTC to UAH rate received",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = ApiResponse.class))}),
+                    content = @Content(schema = @Schema(type = "number"))),
             @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Invalid status value")
     })
     @GetMapping("/rate")
@@ -64,13 +69,27 @@ public class BtcController {
         return coinApiClient.getBitcoinPrice();
     }
 
-    @Operation(summary = "Add email to subscriber email distibution list")
-    @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Email added"),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Email already present in subscription list")
-    })
+    @Operation(tags = "subscription",
+            summary = "Subscribe email on current BTC to UAH rate receiving",
+            description = "Request should subcsribe email address in case it has not been subscribed yet",
+            responses = {
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                            responseCode = "200",
+                            description = "Email was added",
+                            content = @Content(mediaType = "application/json")
+                    ),
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                            responseCode = "400",
+                            description = "Email has been already subscribed"
+                    )
+            })
     @PostMapping(value = "/subscription", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity<String> subscribe(@Parameter(name = "email", description = "Email address, which should be subscribed", required = true)
+    public ResponseEntity<String> subscribe(@Parameter(
+            name = "email",
+            description = "Email address, which should be subscribed",
+            required = true,
+            in = ParameterIn.QUERY,
+            schema = @Schema(type = "string"))
                                             @RequestBody MultiValueMap<String, String> formData) throws SubscriberAlreadySubscribedException, IOException {
         String email = formData.getFirst("email");
 
@@ -81,7 +100,18 @@ public class BtcController {
         return ResponseEntity.ok(Response.EMAIL_ADDED.getResponse());
     }
 
-    @Operation(summary = "Send emails to subscribers")
+    @Operation(
+            tags = "subscription",
+            summary = "Send emails with current BTC to UAH rate all to subscribed emails",
+    description = "Request should receive current BTC to UAH rate from third-party service and send it toall to subscribed emails",
+    operationId = "sendEmails",
+    responses = {
+                    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+                            responseCode = "200",
+                            description = "Emails were sent",
+                            content = @Content(mediaType = "application/json")
+                    )
+    })
     @PostMapping(value = "/sendEmails")
     public ResponseEntity<String> sendEmails() {
         ApiResponse apiResponse = getBtcToUahRate();
