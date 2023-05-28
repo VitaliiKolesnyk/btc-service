@@ -1,5 +1,6 @@
 package com.api.service.impl;
 
+import com.api.exception.NoSubscribersException;
 import com.api.exception.SubscriberAlreadySubscribedException;
 import com.api.model.Subscriber;
 import org.junit.jupiter.api.*;
@@ -57,12 +58,9 @@ class FileServiceImplTest {
     }
 
     @Test
-    @DisplayName("Should return empty list when file does not exist")
-    void shouldReturnEmptyListWhenFileDoesNotExist() {
-        List<Subscriber> subscribers = fileService.getSubscribers();
-
-        assertNotNull(subscribers);
-        assertTrue(subscribers.isEmpty());
+    @DisplayName("Should throw NoSubscribersException")
+    void shouldThrowNoSubscribersException() {
+        assertThrows(NoSubscribersException.class, () -> fileService.getSubscribers());
     }
 
     @Test

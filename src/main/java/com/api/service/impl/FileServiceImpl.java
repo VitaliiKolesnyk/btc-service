@@ -31,13 +31,6 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void addSubscriber(Subscriber subscriber) throws SubscriberAlreadySubscribedException, IOException {
-        List<Subscriber> subscribers = getSubscribers();
-
-        if (subscribers.contains(subscriber)) {
-            log.warn("Subscriber with email {} is already subscribed", subscriber.getMail());
-            throw new SubscriberAlreadySubscribedException();
-        }
-
         try {
             if (!Files.exists(filePath.getParent())) {
                 Files.createDirectories(filePath.getParent());
@@ -46,6 +39,13 @@ public class FileServiceImpl implements FileService {
             if (!Files.exists(filePath)) {
                 Files.createFile(filePath);
                 log.info("File created: {}", filePath);
+            }
+
+            List<Subscriber> subscribers = getSubscribers();
+
+            if (subscribers.contains(subscriber)) {
+                log.warn("Subscriber with email {} is already subscribed", subscriber.getMail());
+                throw new SubscriberAlreadySubscribedException();
             }
 
             Files.write(filePath, (subscriber.getMail() + "\n").getBytes(), StandardOpenOption.APPEND);
